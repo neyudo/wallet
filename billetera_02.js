@@ -26,7 +26,7 @@ const chu = () => {
     let paco = pocas[0][1007];
     console.log(paco);
 }
-
+//otrita
 //prueba
 
 /* setTimeout(() => {
