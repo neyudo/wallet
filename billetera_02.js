@@ -27,7 +27,7 @@ const chu = () => {
     console.log(paco);
 }
 
-
+//prueba
 
 /* setTimeout(() => {
     (async () => { 
