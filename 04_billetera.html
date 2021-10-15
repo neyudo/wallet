@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monedas Crito</title>
+    <link rel="stylesheet" href="bootstrap.min.css"></head>
+<body>
+
+
+  <div class="container mt-5">
+
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                <h3 class="text-center mb-3">
+                    CriptoMundo
+                </h3>
+                <div class="form-group">
+                    <input type="text" id="search" class="form-control form-control-lg" placeholder="Enter crypto name...">
+                </div>
+                <div id="match-list"></div>
+                <input type="submit" value="Add Crypto" class="btn btn-primary btn-block mt-1">
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-hover mt-5">
+        <thead>
+        <tr>
+            <th scope="col">Crypto</th>
+            <th scope="col">Price</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Total</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody id="crypto-list"></tbody>
+    </table>
+
+    <script src="04_b.js"></script>
+</body>
+</html>
