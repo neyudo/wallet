@@ -18,12 +18,15 @@ const add = () => {
             let nuDeIn = binancePrice.findIndex((objeto, indice, cosas) => {
                 if (objeto.symbol == ident) {
                     console.log(objeto);
+                    const cript = new Crypto(objeto);
+                    console.log(cript);
+                    UI.addCryptoToList(cript);
                 }
             });
             matchList.innerHTML = '';
 
         });
-    }
+}
 //_____________________________________
 
 const buscadatos = async  precios => {
@@ -70,9 +73,13 @@ const outputHtml = matches => {
 
  // representa una moneda cripto
  class Crypto {
-     constructor(crypto, precio) {
-         this.crypto = crypto;
-         this.precio = precio;
+    constructor(objeto) {
+        this.objeto = objeto;
+        
+
+/*      constructor(symbol, price) {
+         this.symbol = symbol;
+         this.price = price; */
      }
  }
  class UI {
