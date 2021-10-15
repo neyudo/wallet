@@ -17,10 +17,8 @@ const add = () => {
             binancePrice;
             let nuDeIn = binancePrice.findIndex((objeto, indice, cosas) => {
                 if (objeto.symbol == ident) {
-                    console.log(objeto);
-                    const cript = new Crypto(objeto);
-                    console.log(cript);
-                    UI.addCryptoToList(cript);
+                    const arr = objeto;
+                    UI.addCryptoToList(arr);
                 }
             });
             matchList.innerHTML = '';
