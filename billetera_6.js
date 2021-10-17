@@ -82,12 +82,14 @@ const outputHtml = matches => {
          //Brocker Binance
          const pri = async () => {
              const live = document.getElementById('crypto-list');
-
+             setInterval(() => {
+                 
              const response = await fetch(api_url);
              const datos = await response.json();
              const cryptos = [datos[11], datos[12]];
              console.log(cryptos);
              cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
+            }, 2000);
 
 
 
