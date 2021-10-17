@@ -28,11 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
 }) */
 const pri = async () => {
     const live = document.getElementById('viewLive');
+    const live2 = document.getElementById('otro');
+
     setInterval(async () => {
 
         const response = await fetch(api_url2);
         const datos = await response.json();
         live.textContent = datos[11].price;
+        live2.textContent = datos[11].symbol;
+
         console.clear();
         console.log(live);
     }, 2000);
