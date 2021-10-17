@@ -80,22 +80,18 @@ const outputHtml = matches => {
  class UI {
      static displayCrypto() {
          //Brocker Binance
-         const pri = async () => {
-             const live = document.getElementById('crypto-list');
-             setInterval(() => {
-                 
+         const pri = async () => {                 
              const response = await fetch(api_url);
              const datos = await response.json();
-             const cryptos = [datos[11], datos[12]];
+             const cryptos = [datos[11]];
+             cryptos.forEach((crypto) => UI.addCryptoToList(cryptos));
              console.log(cryptos);
-             cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
-            }, 2000);
-
-
-
-
          }
+         setInterval(() => {         
          pri();
+        }, 2000);
+//cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
+
      }
     
      static addCryptoToList(crypto) {
@@ -104,8 +100,8 @@ const outputHtml = matches => {
          const row = document.createElement('tr');
 
          row.innerHTML = `
-                 <td>${crypto.symbol}</td>
-                 <td>${parseFloat(crypto.price)}</td>
+                 <td>${crypto[0].symbol}</td>
+                 <td> <strong id="otro">${crypto[0].price}</strong> </td>
                  <td>${crypto.symbol}</td>
                  <td>${crypto.symbol}</td>
                  <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
