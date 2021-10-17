@@ -9,7 +9,7 @@ async function loadNames(link) {
 loadNames(api_url2);
 const pocas = [];
 
-function live() {
+/* function live() {
     const live = document.getElementById('viewLive');
 
     setInterval( function ()  {
@@ -25,8 +25,25 @@ function live() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     live();
-})
+}) */
+const pri = async () => {
+    const live = document.getElementById('viewLive');
+    setInterval(async () => {
 
+        const response = await fetch(api_url2);
+        const datos = await response.json();
+        live.textContent = datos[11].price;
+        console.clear();
+        console.log(live);
+    }, 2000);
+
+
+}
+document.addEventListener('DOMContentLoaded', function () {
+    pri();
+
+})
+ 
 function chu() {
     let paco = pocas[0][1007];
     console.log(paco);

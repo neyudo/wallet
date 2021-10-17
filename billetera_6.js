@@ -1,3 +1,4 @@
+
 const search = document.getElementById('search')
 const matchList = document.getElementById('match-list')
 const api_url = 'https://api1.binance.com/api/v3/ticker/price'
@@ -18,6 +19,7 @@ const add = () => {
             let nuDeIn = binancePrice.findIndex((objeto, indice, cosas) => {
                 if (objeto.symbol == ident) {
                     const arr = objeto;
+                    console.log(arr.price);
                     UI.addCryptoToList(arr);
                 }
             });
@@ -79,11 +81,14 @@ const outputHtml = matches => {
      static displayCrypto() {
          //Brocker Binance
          const pri = async () => {
+            const live = document.getElementById('crypto-list');
              const response = await fetch(api_url);
              const datos = await response.json();
              const cryptos = [datos[11], datos[12]];
              console.log(cryptos);
              cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
+             console.log(live);
+
          }
          pri();
      }
@@ -103,6 +108,7 @@ const outputHtml = matches => {
 
          list.appendChild(row);
      }
+
      static deleteCrypto(el) {
         if (el.classList.contains('delete')) {
             el.parentElement.parentElement.remove();
