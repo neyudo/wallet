@@ -73,25 +73,20 @@ const outputHtml = matches => {
  class Crypto {
     constructor(objeto) {
         this.objeto = objeto;
-        
-
-/*      constructor(symbol, price) {
-         this.symbol = symbol;
-         this.price = price; */
      }
  }
  class UI {
      static displayCrypto() {
-        //Brocker Binance
-       const pri = async () => {
+         //Brocker Binance
+         const pri = async () => {
              const response = await fetch(api_url);
              const datos = await response.json();
-            const cryptos = [datos[11], datos[12]];
-             console.log(cryptos);                 
+             const cryptos = [datos[11], datos[12]];
+             console.log(cryptos);
              cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
          }
          pri();
-    }
+     }
     
      static addCryptoToList(crypto) {
          const list = document.querySelector('#crypto-list');

@@ -1,15 +1,3 @@
-function tick() {
-    const element = (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {new Date().toLocaleTimeString()}.</h2>
-      </div>
-    );
-    ReactDOM.render(element, document.getElementById('root'));
-  }
-  
-  setInterval(tick, 1000);
-  tick();
 
 const api_url2 = 'https://api1.binance.com/api/v3/ticker/price'
 async function loadNames(link) {
@@ -21,8 +9,25 @@ async function loadNames(link) {
 loadNames(api_url2);
 const pocas = [];
 
+function live() {
+    const live = document.getElementById('viewLive');
 
-const chu = () => {
+    setInterval( function ()  {
+        fetch(api_url2).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            live.textContent = data[11].price;
+        }).catch(function (error) {
+            console.log(data[0].price);
+            console.log(error);
+        })
+    }, 2000);
+}
+document.addEventListener('DOMContentLoaded', function () {
+    live();
+})
+
+function chu() {
     let paco = pocas[0][1007];
     console.log(paco);
 }
