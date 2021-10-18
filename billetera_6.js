@@ -121,18 +121,22 @@ const outputHtml = matches => {
              let clickPrecio = document.getElementsByClassName('sim');
              for (let cell of clickPrecio) {
                  let val = cell.innerText;
-                 console.log(val);
+                 const cripSymbol = [];
+                 cripSymbol.push(val);
+                 console.log(cripSymbol);
+                 for (let [i, cripi] of cryptos.entries()) {
+                    let iterP;
+                    live[i].innerHTML = `${cripi.symbol}`;
+                    iterP = live[i].innerHTML;
+                    console.log(cripSymbol === iterP);
+                    
+                }
              }
-
              //console.log(clickPrecio);
-
              //console.log(cryptos);
              //https://es.stackoverflow.com/questions/313984/como-actualizar-una-tabla-despues-de-eliminar-un-dato
              //cryptos.forEach(element => console.log(element), console.clear());
-             for (let [i, cripi] of cryptos.entries()) {
-                 live[i].innerHTML = `${cripi.price}`
-                 //console.log(live[i].innerHTML);
-             }
+         
              //cryptos.forEach(crip => live.innerHTML = crip.price);
 
              //console.log(live);
