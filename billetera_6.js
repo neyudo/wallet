@@ -85,29 +85,37 @@ const outputHtml = matches => {
              const datos = await response.json();
              const cryptos = [datos[11]];
              cryptos.forEach((crypto) => UI.addCryptoToList(cryptos));
-             console.log(cryptos);
+             console.log(crypto);
          }
-         setInterval(() => {         
+             setInterval(() => {
+                 
          pri();
         }, 2000);
+
 //cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
 
      }
     
      static addCryptoToList(crypto) {
          const list = document.querySelector('#crypto-list');
+         list.innerHTML = crypto[0].price;
+         console.log(list);
 
-         const row = document.createElement('tr');
-
+         //const row = document.createElement('tr');
+/* 
          row.innerHTML = `
+                ${crypto[0].price}
+         `;
+         
+         `
                  <td>${crypto[0].symbol}</td>
                  <td> <strong id="otro">${crypto[0].price}</strong> </td>
                  <td>${crypto.symbol}</td>
                  <td>${crypto.symbol}</td>
                  <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-             `;
+             `;     
+         list.appendChild(row);*/
 
-         list.appendChild(row);
      }
 
      static deleteCrypto(el) {
