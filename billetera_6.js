@@ -78,45 +78,131 @@ const outputHtml = matches => {
      }
  }
  class UI {
-     static displayCrypto() {
-         //Brocker Binance
-         const pri = async () => {                 
-             const response = await fetch(api_url);
-             const datos = await response.json();
-             const cryptos = [datos[11]];
-             cryptos.forEach((crypto) => UI.addCryptoToList(cryptos));
-             console.log(crypto);
-         }
-             setInterval(() => {
-                 
-         pri();
-        }, 2000);
+    static displayCrypto() {
+        //Brocker Binance
+        const pri = async () => {
+            const live = document.getElementById('crypto-list');
 
-//cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
+            const response = await fetch(api_url),
+            datos = await response.json(),
+            btc = datos[11],
+            eth = datos[12],
+            nose = datos[13],
+            cryptos = [btc, eth, nose];
+            //console.log(cryptos);
+            cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
 
-     }
+
+
+
+        }    
+        pri();
+    }
     
      static addCryptoToList(crypto) {
-         const list = document.querySelector('#crypto-list');
-         list.innerHTML = crypto[0].price;
-         console.log(list);
+        const list = document.querySelector('#crypto-list');
 
+        const row = document.createElement('tr');
+        row.setAttribute("id", "otro")
+        console.log(row)
+
+
+        row.innerHTML = `
+                <td>${crypto.symbol}</td>
+                <td class="precio">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
+            `;
+            const live = document.getElementsByClassName('precio');
+                const pri = async () => {
+                    const live = document.getElementsByClassName('precio'),
+                     response = await fetch(api_url),
+                     datos = await response.json(),
+                     btc = datos[11],
+                     eth = datos[12],
+                     nose = datos[13],
+                     cryptos = [btc, eth, nose];
+                
+                    //console.log(cryptos);
+                    cryptos.forEach(element =>   console.log(element), console.clear());
+                    for(let [i, cripi] of cryptos.entries()) {
+                        live[i].innerHTML = `${cripi.price}`
+                        console.log(live[i].innerHTML);
+                    }
+                    //cryptos.forEach(crip => live.innerHTML = crip.price);
+                    
+                    //console.log(live);
+                }
+                setInterval(() => {
+
+                pri();
+                
+
+        }, 2000);
+
+
+        list.appendChild(row);
+/*         document.addEventListener('list.appendChildLoaded', 
+            live2.innerHTML = crypto[0].price,
+            console.log(live2)
+        ); */
+
+        
+/*         const live2 = document.getElementById('DOMContentLoaded', 'otro');
+        live2.innerHTML = crypto[0].price;
+        console.log(live2.innerHTML); */
+
+
+    
+         /* const list = document.querySelector('#crypto-list');
+         const btcp = crypto[0].price;
+         let btcPMasTusCrip = btcp * 0.017387 
+         //list.innerHTML = crypto[0].price;
          //const row = document.createElement('tr');
-/* 
+         const row = document.createElement('tr'); */
+/*          list.innerHTML = `
+                 <tr>
+                    <td>${crypto[0].symbol}</td>
+                    <td id="symbol">${parseFloat(btcp)}</td>
+                    <td>${0.01}</td>
+                    <td>${btcPMasTusCrip.toFixed(2)}</td>
+                    <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
+                 </td>
+                 <tr>
+                 <td>${crypto[1].symbol}</td>
+                 <td id="symbol">${parseFloat(crypto[1].price)}</td>
+                 <td>${crypto[1].symbol}</td>
+                 <td>${crypto[1].symbol}</td>
+                 <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
+              </td>
+         `; 
          row.innerHTML = `
-                ${crypto[0].price}
+         <td>${crypto.symbol}</td>
+         <td>${crypto.price}</td>
+         <td>${crypto.price}</td>
+         <td>${crypto.price}</td>
+         <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
          `;
-         
-         `
-                 <td>${crypto[0].symbol}</td>
-                 <td> <strong id="otro">${crypto[0].price}</strong> </td>
-                 <td>${crypto.symbol}</td>
-                 <td>${crypto.symbol}</td>
-                 <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-             `;     
-         list.appendChild(row);*/
+         list.appendChild(row);
+         console.log(zip.innerHTML);
+         */
+         /* 
+                  row.innerHTML = `
+                         ${crypto[0].price}
+                  `;
+                  
+                  `
+                          <td>${crypto[0].symbol}</td>
+                          <td> <strong id="otro">${crypto[0].price}</strong> </td>
+                          <td>${crypto.symbol}</td>
+                          <td>${crypto.symbol}</td>
+                          <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
+                      `;     
+                  list.appendChild(row);*/
 
      }
+     
 
      static deleteCrypto(el) {
         if (el.classList.contains('delete')) {
@@ -140,6 +226,8 @@ document.addEventListener('DOMContentLoaded', UI.displayCrypto);
 //Event: Add
 
 search.addEventListener('input', () => buscadatos(search.value));
+    
+
 
 
 /* document.querySelector('#bloque').addEventListener('submit', function aro(event) {
