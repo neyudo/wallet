@@ -126,32 +126,20 @@ const outputHtml = matches => {
                  const valCryptoIter = iterator.innerText;
                  let compa = datos.findIndex((objeto, indice, cosas) => {
                      if (objeto.symbol == valCryptoIter) {
-                         const arr = objeto;
-/*                          for (let [i, cripi] of arr.price)
-                         live[i].innerHTML = `${cripi.price}`; */
-                         console.log(arr);
-                         //UI.addCryptoToList(arr);
-/*                          for (let [i, cripi] of cryptos.entries()) {
-                             let iterP;
-                             live[i].innerHTML = `${cripi.price}`;
-                             iterP = live[i].innerHTML;
-                             //console.log(cripSymbol === iterP);
-
-                         } */
+                         const respuesta = objeto;
+                         console.log(respuesta);
+                         return respuesta;
                      }
                  });
+                 //https://www.iteramos.com/pregunta/20124/como-puedo-iterar-a-traves-de-las-filas-de-la-tabla-y-las-celdas-en-javascript
+                 console.log(compa);
+/*                  for (let [i, cripi] of [compa].entries()) {
+                     live[i].innerHTML = `${cripi.price}`;
+                     //console.log(cripSymbol === iterP);
+
+                 } */
              }
-             /*              for (let cell of clickPrecio) {
-                              let val = cell.innerText;
-                              console.log(val);
-                              const cripSymbol = [];
-                              for (let [i, cripi] of cryptos.entries()) {
-                                 let iterP;
-                                 live[i].innerHTML = `${cripi.symbol}`;
-                                 iterP = live[i].innerHTML;
-                                 
-                             }
-                          } */
+
              //console.log(clickPrecio);
              //console.log(cryptos);
              //https://es.stackoverflow.com/questions/313984/como-actualizar-una-tabla-despues-de-eliminar-un-dato
@@ -165,63 +153,6 @@ const outputHtml = matches => {
              pri();
          }, 3000);
          list.appendChild(row);
-         /*         document.addEventListener('list.appendChildLoaded', 
-                     live2.innerHTML = crypto[0].price,
-                     console.log(live2)
-                 ); */
-
-
-         /*         const live2 = document.getElementById('DOMContentLoaded', 'otro');
-                 live2.innerHTML = crypto[0].price;
-                 console.log(live2.innerHTML); */
-
-
-
-         /* const list = document.querySelector('#crypto-list');
-         const btcp = crypto[0].price;
-         let btcPMasTusCrip = btcp * 0.017387 
-         //list.innerHTML = crypto[0].price;
-         //const row = document.createElement('tr');
-         const row = document.createElement('tr'); */
-         /*          list.innerHTML = `
-                          <tr>
-                             <td>${crypto[0].symbol}</td>
-                             <td id="symbol">${parseFloat(btcp)}</td>
-                             <td>${0.01}</td>
-                             <td>${btcPMasTusCrip.toFixed(2)}</td>
-                             <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
-                          </td>
-                          <tr>
-                          <td>${crypto[1].symbol}</td>
-                          <td id="symbol">${parseFloat(crypto[1].price)}</td>
-                          <td>${crypto[1].symbol}</td>
-                          <td>${crypto[1].symbol}</td>
-                          <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
-                       </td>
-                  `; 
-                  row.innerHTML = `
-                  <td>${crypto.symbol}</td>
-                  <td>${crypto.price}</td>
-                  <td>${crypto.price}</td>
-                  <td>${crypto.price}</td>
-                  <td><a href="#" class="btn btn-danger btn-sm delete" >X</a>
-                  `;
-                  list.appendChild(row);
-                  console.log(zip.innerHTML);
-                  */
-         /* 
-                  row.innerHTML = `
-                         ${crypto[0].price}
-                  `;
-                  
-                  `
-                          <td>${crypto[0].symbol}</td>
-                          <td> <strong id="otro">${crypto[0].price}</strong> </td>
-                          <td>${crypto.symbol}</td>
-                          <td>${crypto.symbol}</td>
-                          <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-                      `;     
-                  list.appendChild(row);*/
 
      }
      
