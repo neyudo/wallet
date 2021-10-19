@@ -104,46 +104,66 @@ const outputHtml = matches => {
 
 
          row.innerHTML = `
-                <td class="sim">${crypto.symbol}</td>
+                <td class="sim" value="sip" id="simbolo">${crypto.symbol}</td>
                 <td class="precio">0</td>
                 <td>0</td>
                 <td>0</td>
                 <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
             `;
          const pri = async () => {
+             //esta es la constante con la clase del precio dentro del row.iinerHTML
              const live = document.getElementsByClassName('precio'),
                  response = await fetch(api_url),
                  datos = await response.json(),
+                 //ejemplos cada uno seleccionado para poder crae un array
                  btc = datos[11],
                  eth = datos[12],
                  ksm = datos[1007],
                  cryptos = [btc, eth, ksm];
+             //constante que me deja entrar a la clase del td y me permite ver su contenido con unas iteraciones
              let clickPrecio = document.getElementsByClassName('sim');
-             for (let cell of clickPrecio) {
-                 let val = cell.innerText;
-                 const cripSymbol = [];
-                 cripSymbol.push(val);
-                 console.log(cripSymbol);
-                 for (let [i, cripi] of cryptos.entries()) {
-                    let iterP;
-                    live[i].innerHTML = `${cripi.symbol}`;
-                    iterP = live[i].innerHTML;
-                    console.log(cripSymbol === iterP);
-                    
-                }
+             for (const iterator of clickPrecio) {
+                 const valCryptoIter = iterator.innerText;
+                 let compa = datos.findIndex((objeto, indice, cosas) => {
+                     if (objeto.symbol == valCryptoIter) {
+                         const arr = objeto;
+/*                          for (let [i, cripi] of arr.price)
+                         live[i].innerHTML = `${cripi.price}`; */
+                         console.log(arr);
+                         //UI.addCryptoToList(arr);
+/*                          for (let [i, cripi] of cryptos.entries()) {
+                             let iterP;
+                             live[i].innerHTML = `${cripi.price}`;
+                             iterP = live[i].innerHTML;
+                             //console.log(cripSymbol === iterP);
+
+                         } */
+                     }
+                 });
              }
+             /*              for (let cell of clickPrecio) {
+                              let val = cell.innerText;
+                              console.log(val);
+                              const cripSymbol = [];
+                              for (let [i, cripi] of cryptos.entries()) {
+                                 let iterP;
+                                 live[i].innerHTML = `${cripi.symbol}`;
+                                 iterP = live[i].innerHTML;
+                                 
+                             }
+                          } */
              //console.log(clickPrecio);
              //console.log(cryptos);
              //https://es.stackoverflow.com/questions/313984/como-actualizar-una-tabla-despues-de-eliminar-un-dato
              //cryptos.forEach(element => console.log(element), console.clear());
-         
+
              //cryptos.forEach(crip => live.innerHTML = crip.price);
 
              //console.log(live);
          }
          setInterval(() => {
              pri();
-         }, 2000);
+         }, 3000);
          list.appendChild(row);
          /*         document.addEventListener('list.appendChildLoaded', 
                      live2.innerHTML = crypto[0].price,
