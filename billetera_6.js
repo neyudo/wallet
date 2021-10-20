@@ -88,7 +88,7 @@ const outputHtml = matches => {
             btc = datos[11],
             eth = datos[12],
             ksm = datos[1007],
-            cryptos = [btc, eth, ksm];
+            cryptos = [btc, eth];
             //console.log(cryptos);
             cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
         }    
@@ -100,16 +100,7 @@ const outputHtml = matches => {
 
          const row = document.createElement('tr');
          row.setAttribute("id", "otro")
-         console.log(row)
 
-
-         row.innerHTML = `
-                <td class="sim" value="sip" id="simbolo">${crypto.symbol}</td>
-                <td class="precio">0</td>
-                <td>0</td>
-                <td>0</td>
-                <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-            `;
          const pri = async () => {
              //esta es la constante con la clase del precio dentro del row.iinerHTML
              const live = document.getElementsByClassName('precio'),
@@ -122,23 +113,46 @@ const outputHtml = matches => {
                  cryptos = [btc, eth, ksm];
              //constante que me deja entrar a la clase del td y me permite ver su contenido con unas iteraciones
              let clickPrecio = document.getElementsByClassName('sim');
-             for (const iterator of clickPrecio) {
+/*              for (const iterator of clickPrecio) {
                  const valCryptoIter = iterator.innerText;
                  let compa = datos.findIndex((objeto, indice, cosas) => {
                      if (objeto.symbol == valCryptoIter) {
-                         const respuesta = objeto;
-                         console.log(respuesta);
-                         return respuesta;
+                         const respuesta = objeto,
+                             precioFinal = respuesta.price;
+                         
+                         console.log(precioFinal);
+                         for (const iterator2 of precioFinal) {
+                             iterator2 += 1;
+                            console.log(iterator2);
+                        }
                      }
-                 });
+                 }); */
+             for (let index = 0; index < clickPrecio.length; index++) {
+                 const element = clickPrecio[index].innerHTML,
+                     raya = element.split(/("")/u);
+                 let compa = datos.findIndex((objeto, indice, cosa) => {
+                     if (objeto.symbol == raya) {
+                         const resul = objeto;
+                         console.log(resul);
+                         for (let [i, cripi] of [resul].entries()) {
+                             live[i].innerHTML = `${cripi.price}`;
+                             
+                             //console.log(cripSymbol === iterP);
+        
+                         }
+                     }
+                 })
+                 //console.log(raya);
+                 
+             }
                  //https://www.iteramos.com/pregunta/20124/como-puedo-iterar-a-traves-de-las-filas-de-la-tabla-y-las-celdas-en-javascript
-                 console.log(compa);
+                 //console.log(compa);
 /*                  for (let [i, cripi] of [compa].entries()) {
                      live[i].innerHTML = `${cripi.price}`;
                      //console.log(cripSymbol === iterP);
 
                  } */
-             }
+             //}
 
              //console.log(clickPrecio);
              //console.log(cryptos);
@@ -151,8 +165,15 @@ const outputHtml = matches => {
          }
          setInterval(() => {
              pri();
-         }, 3000);
+         }, 4000);
          list.appendChild(row);
+                 row.innerHTML = `
+                <td class="sim" value="sip" id="simbolo">${crypto.symbol}</td>
+                <td class="precio">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
+            `;
 
      }
      
