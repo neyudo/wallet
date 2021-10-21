@@ -97,6 +97,7 @@ const outputHtml = matches => {
 
          const pri = async () => {
              const pux = [];
+             const listaDePrecios = [];
              //esta es la constante con la clase del precio dentro del row.innerHTML
              const live = document.getElementsByClassName('precio'),
                  response = await fetch(api_url),
@@ -104,11 +105,27 @@ const outputHtml = matches => {
              //constante que me deja entrar a la clase del td y me permite ver su contenido con unas iteraciones
              const clickPrecio = document.getElementsByClassName('sim');
              // Itero en la variante ClickPrecio y obtengo su informacion en este caso los simblolos del cripto deseado
-             for (const index  in clickPrecio) {
-                 const element1 = clickPrecio[index].innerHTML.split(/("")/u);
-                 console.log(element1);
+             for (let cell of clickPrecio) {
+                 let val = cell.innerText.split(/("")/u);
+                 let compa = datos.findIndex((objeto, indice, cosa) => {
+                 if (objeto.symbol == val) {
+                     const resul = objeto;
+                     listaDePrecios.push(resul);
+                     }
+             });
+                 console.log(listaDePrecios);
+                 
              }
-             for (let index = 0; index < clickPrecio.length; index++) {
+                              /* for (let [i, cripi] of cryptos.entries()) {
+                                 let iterP;
+                                 live[i].innerHTML = `${cripi.symbol}`;
+                                 iterP = live[i].innerHTML;
+                                 
+                             }
+                          }  */
+
+
+             /* for (let index = 0; index < clickPrecio.length; index++) {
                  const element = clickPrecio[index].innerHTML,
                      raya = element.split(/("")/u);
                  let compa = datos.findIndex((objeto, indice, cosa) => {
@@ -117,8 +134,8 @@ const outputHtml = matches => {
                      pux.push(resul);
                      }
              });
-             }
-             for (let [i, cripi] of (pux).entries()) {
+             } */
+             for (let [i, cripi] of (listaDePrecios).entries()) {
                             live[i].innerHTML = `${parseFloat(cripi.price)}`;
                             
        
