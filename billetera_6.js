@@ -62,12 +62,6 @@ const outputHtml = matches => {
         `)
             .join('');
         matchList.innerHTML = html;
-/*         document.querySelector('#bloque').addEventListener('submit', (event) => {
-            event.preventDefault();
-            const newPrice = document.querySelector('#${match.symbol}').value;
-            const cript = new Crypto(symbol)
-            console.log(cript);
-        }) */
     }
 }
 
@@ -88,7 +82,7 @@ const outputHtml = matches => {
             btc = datos[11],
             eth = datos[12],
             ksm = datos[1007],
-            cryptos = [btc, eth];
+            cryptos = [btc, eth, ksm];
             //console.log(cryptos);
             cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
         }    
@@ -102,70 +96,33 @@ const outputHtml = matches => {
          row.setAttribute("id", "otro")
 
          const pri = async () => {
+             const pux = [];
              //esta es la constante con la clase del precio dentro del row.iinerHTML
              const live = document.getElementsByClassName('precio'),
                  response = await fetch(api_url),
-                 datos = await response.json(),
-                 //ejemplos cada uno seleccionado para poder crae un array
-                 btc = datos[11],
-                 eth = datos[12],
-                 ksm = datos[1007],
-                 cryptos = [btc, eth, ksm];
+                 datos = await response.json();
              //constante que me deja entrar a la clase del td y me permite ver su contenido con unas iteraciones
-             let clickPrecio = document.getElementsByClassName('sim');
-/*              for (const iterator of clickPrecio) {
-                 const valCryptoIter = iterator.innerText;
-                 let compa = datos.findIndex((objeto, indice, cosas) => {
-                     if (objeto.symbol == valCryptoIter) {
-                         const respuesta = objeto,
-                             precioFinal = respuesta.price;
-                         
-                         console.log(precioFinal);
-                         for (const iterator2 of precioFinal) {
-                             iterator2 += 1;
-                            console.log(iterator2);
-                        }
-                     }
-                 }); */
+             const clickPrecio = document.getElementsByClassName('sim');
              for (let index = 0; index < clickPrecio.length; index++) {
                  const element = clickPrecio[index].innerHTML,
                      raya = element.split(/("")/u);
                  let compa = datos.findIndex((objeto, indice, cosa) => {
-                     if (objeto.symbol == raya) {
-                         const resul = objeto;
-                         console.log(resul);
-                         for (let [i, cripi] of [resul].entries()) {
-                             live[i].innerHTML = `${cripi.price}`;
-                             
-                             //console.log(cripSymbol === iterP);
-        
-                         }
+                 if (objeto.symbol == raya) {
+                     const resul = objeto;
+                     pux.push(resul);
                      }
-                 })
-                 //console.log(raya);
-                 
+             });
              }
-                 //https://www.iteramos.com/pregunta/20124/como-puedo-iterar-a-traves-de-las-filas-de-la-tabla-y-las-celdas-en-javascript
-                 //console.log(compa);
-/*                  for (let [i, cripi] of [compa].entries()) {
-                     live[i].innerHTML = `${cripi.price}`;
-                     //console.log(cripSymbol === iterP);
-
-                 } */
-             //}
-
-             //console.log(clickPrecio);
-             //console.log(cryptos);
-             //https://es.stackoverflow.com/questions/313984/como-actualizar-una-tabla-despues-de-eliminar-un-dato
-             //cryptos.forEach(element => console.log(element), console.clear());
-
-             //cryptos.forEach(crip => live.innerHTML = crip.price);
-
-             //console.log(live);
-         }
-         setInterval(() => {
-             pri();
-         }, 4000);
+             for (let [i, cripi] of (pux).entries()) {
+                            live[i].innerHTML = `${parseFloat(cripi.price)}`;
+                            
+       
+                        }
+                }
+                setInterval(() => {
+                    pri();
+                }, 2000);
+                
          list.appendChild(row);
                  row.innerHTML = `
                 <td class="sim" value="sip" id="simbolo">${crypto.symbol}</td>
@@ -200,13 +157,3 @@ document.addEventListener('DOMContentLoaded', UI.displayCrypto);
 //Event: Add
 
 search.addEventListener('input', () => buscadatos(search.value));
-    
-
-
-
-/* document.querySelector('#bloque').addEventListener('submit', function aro(event) {
-    event.preventDefault();
-    const newPrice = document.querySelector('#${match.symbol}').value;
-    const cript = new Crypto(symbol)
-    console.log(cript);
-}); */
