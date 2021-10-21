@@ -97,12 +97,17 @@ const outputHtml = matches => {
 
          const pri = async () => {
              const pux = [];
-             //esta es la constante con la clase del precio dentro del row.iinerHTML
+             //esta es la constante con la clase del precio dentro del row.innerHTML
              const live = document.getElementsByClassName('precio'),
                  response = await fetch(api_url),
                  datos = await response.json();
              //constante que me deja entrar a la clase del td y me permite ver su contenido con unas iteraciones
              const clickPrecio = document.getElementsByClassName('sim');
+             // Itero en la variante ClickPrecio y obtengo su informacion en este caso los simblolos del cripto deseado
+             for (const index  in clickPrecio) {
+                 const element1 = clickPrecio[index].innerHTML.split(/("")/u);
+                 console.log(element1);
+             }
              for (let index = 0; index < clickPrecio.length; index++) {
                  const element = clickPrecio[index].innerHTML,
                      raya = element.split(/("")/u);
