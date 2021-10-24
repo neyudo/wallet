@@ -12,28 +12,29 @@ const addCosas = [];
 //Introduce con un click tu Crypto que quieres observar
 const add = async () => {
     let ident = event.target.id.split(/("")/u);
+    /* let ident = event.target.id.split(/("")/u);
     console.log(ident);
     UI.addCryptoToList(ident);
     matches = [];
-    matchList.innerHTML = '';
+    matchList.innerHTML = ''; */
     /* const responseP = await fetch(api_SoloPrecio + ident);
     const datosSoloPrecio2 = await responseP.json();
     console.log(datosSoloPrecio2); */
     
-    /* fetch(api_url)
+    fetch(api_url)
         .then(response => response.json())
         .then(binancePrice => {
             binancePrice;
             let nuDeIn = binancePrice.findIndex((objeto, indice, cosas) => {
                 if (objeto.symbol == ident) {
                     const arr = objeto;
-                    console.log(arr.price);
+                    console.log(arr);
                     UI.addCryptoToList(arr);
                 }
             }); 
             matchList.innerHTML = '';
 
-        });*/
+        });
 }
 //_____________________________________
 
@@ -80,36 +81,39 @@ const outputHtml = matches => {
  class UI {
     static displayCrypto() {
         //Brocker Binance
-        const cryptos = ['BTCUSDT', 'ETHUSDT', 'KSMUSDT'];
-        cryptos.forEach((crypto) => UI.addCryptoToList(crypto.split(/("")/u)));
+        /* const cryptos = ['BTCUSDT', 'ETHUSDT', 'KSMUSDT'];
+        cryptos.forEach((crypto) => UI.addCryptoToList(crypto.split(/("")/u))); */
         //
-        /* const pri = async () => {
+        const pri = async () => {
             const response = await fetch(api_url),
             datos = await response.json(),
             btc = datos[11],
             eth = datos[12],
             ksm = datos[1007],
                 cryptos = [btc, eth, ksm];
-            console.log(datos);
             //console.log(cryptos);
             cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
         }    
-        pri(); */
+        pri();
     }
     
      static addCryptoToList(crypto) {
-
+         console.log(crypto);
          const list = document.querySelector('#crypto-list');
          const row = document.createElement('tr');
          const live = document.getElementsByClassName('precio');
          row.setAttribute("id", "otro")
+         const ulti = util => {
+             for
+
+         };
          //const clickPrecio = document.getElementsByClassName('sim');
          //console.log(clickPrecio);
          const listaDePrecios1 = [];
 
          //const clickPrecio = document.getElementsByClassName('sim');
 
-         const flag = async picho => {
+         /* const flag = async picho => {
              for (let cell of crypto) {
                  //let val = cell.innerText.split(/("")/u);
                  const response2 = await fetch(api_SoloPrecio + cell);
@@ -120,18 +124,19 @@ const outputHtml = matches => {
          document.getElementById('pre').textContent = listaDePrecios1[0].price;
 
              }
+             }
+         flag(); */
              /* for (let [i, cripi] of (listaDePrecios1).entries()) {
                  live[i].innerHTML = `${parseFloat(cripi.price)}`;
 
 
              } */
 
-         }
-         flag();
+         
          list.appendChild(row);
          row.innerHTML = `
-                        <td class="sim" onload="mifuc()" >${crypto}</td>
-                        <td class="precio" id="pre">0</td>
+                        <td class="sim" onload="mifuc()" >${crypto.symbol}</td>
+                        <td class="precio" id="pre">${crypto.price}</td>
                         <td>0</td>
                         <td>0</td>
                         <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
