@@ -14,6 +14,7 @@ const add = async () => {
     let ident = event.target.id.split(/("")/u);
     console.log(ident);
     UI.addCryptoToList(ident);
+    matches = [];
     matchList.innerHTML = '';
     /* const responseP = await fetch(api_SoloPrecio + ident);
     const datosSoloPrecio2 = await responseP.json();
@@ -81,7 +82,6 @@ const outputHtml = matches => {
         //Brocker Binance
         const cryptos = ['BTCUSDT', 'ETHUSDT', 'KSMUSDT'];
         cryptos.forEach((crypto) => UI.addCryptoToList(crypto.split(/("")/u)));
-        console.log(cryptos);
         //
         /* const pri = async () => {
             const response = await fetch(api_url),
@@ -98,14 +98,15 @@ const outputHtml = matches => {
     }
     
      static addCryptoToList(crypto) {
+
          const list = document.querySelector('#crypto-list');
          const row = document.createElement('tr');
          const live = document.getElementsByClassName('precio');
          row.setAttribute("id", "otro")
          //const clickPrecio = document.getElementsByClassName('sim');
          //console.log(clickPrecio);
-         console.log(crypto);
          const listaDePrecios1 = [];
+
          //const clickPrecio = document.getElementsByClassName('sim');
 
          const flag = async picho => {
@@ -113,28 +114,30 @@ const outputHtml = matches => {
                  //let val = cell.innerText.split(/("")/u);
                  const response2 = await fetch(api_SoloPrecio + cell);
                  const datosSoloPrecio = await response2.json();
-                 
+                 console.log(datosSoloPrecio.price);
                  listaDePrecios1.push(datosSoloPrecio);
-             }
-                              console.log(listaDePrecios1);
+                 console.log(listaDePrecios1[0].price);
+         document.getElementById('pre').textContent = listaDePrecios1[0].price;
 
-             for (let [i, cripi] of (listaDePrecios1).entries()) {
+             }
+             /* for (let [i, cripi] of (listaDePrecios1).entries()) {
                  live[i].innerHTML = `${parseFloat(cripi.price)}`;
 
-             
-         } 
-              
+
+             } */
+
          }
          flag();
-    
          list.appendChild(row);
          row.innerHTML = `
-                <td class="sim" onload="mifuc()" >${crypto}</td>
-                <td class="precio">0</td>
-                <td>0</td>
-                <td>0</td>
-                <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-            `;
+                        <td class="sim" onload="mifuc()" >${crypto}</td>
+                        <td class="precio" id="pre">0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
+                    `;
+
+
 
      }
      
