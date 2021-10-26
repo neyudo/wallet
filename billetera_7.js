@@ -22,9 +22,11 @@ const add = () => {
                     console.log(arr.price);
                     UI.addCryptoToList(arr);
                 }
+                
             });
             matchList.innerHTML = '';
-
+            //Clear fiels
+                UI.clearFields()
         });
 }
 //_____________________________________
@@ -140,6 +142,9 @@ const outputHtml = matches => {
                  console.log(cell.innerText.split(/("")/u))
              }
          } */
+     }
+     static clearFields() {
+         document.querySelector('#search').value = '';
      }
 
      
