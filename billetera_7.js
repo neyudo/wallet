@@ -86,66 +86,97 @@ const outputHtml = matches => {
         //
         const pri = async () => {
             const response = await fetch(api_url),
-            datos = await response.json(),
-            btc = datos[11],
-            eth = datos[12],
-            ksm = datos[1007],
-                cryptos = [btc, eth, ksm];
-            //console.log(cryptos);
-            cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
-        }    
+                datos = await response.json(),
+                btc = datos[11],
+                eth = datos[12],
+                ksm = datos[1007],
+                cryptos = [btc, eth, ksm],
+                tocri = [{
+                    symbol: 'btc',
+                    price: '65000'
+                },
+                {
+                    symbol: 'eth',
+                    price: '4500'
+                }
+                ];
+                            
+            cryptos.forEach((crypto) => UI.addCryptoToList(crypto, cryptos, tocri));
+        }
         pri();
     }
-    
-     static addCryptoToList(crypto) {
-         console.log(crypto);
-         const list = document.querySelector('#crypto-list');
-         const row = document.createElement('tr');
-         const live = document.getElementsByClassName('precio');
-         row.setAttribute("id", "otro")
-         const ulti = util => {
-             for
 
-         };
-         //const clickPrecio = document.getElementsByClassName('sim');
-         //console.log(clickPrecio);
-         const listaDePrecios1 = [];
+     static addCryptoToList(crypto, cryptos, mas) {
+        //console.log(cryptos);
+        
+        //const clickPrecio = document.getElementsByClassName('sim');
+        //console.log(clickPrecio);
+        const listaDePrecios1 = [];
 
-         //const clickPrecio = document.getElementsByClassName('sim');
+        //const clickPrecio = document.getElementsByClassName('sim');
 
-         /* const flag = async picho => {
-             for (let cell of crypto) {
-                 //let val = cell.innerText.split(/("")/u);
-                 const response2 = await fetch(api_SoloPrecio + cell);
-                 const datosSoloPrecio = await response2.json();
-                 console.log(datosSoloPrecio.price);
-                 listaDePrecios1.push(datosSoloPrecio);
-                 console.log(listaDePrecios1[0].price);
-         document.getElementById('pre').textContent = listaDePrecios1[0].price;
-
-             }
-             }
-         flag(); */
-             /* for (let [i, cripi] of (listaDePrecios1).entries()) {
-                 live[i].innerHTML = `${parseFloat(cripi.price)}`;
+        const flag = async picho => {
+            for (let cell of crypto.symbol.split(/("")/u)) {
+                //let val = cell.innerText.split(/("")/u);
+                const response2 = await fetch(api_SoloPrecio + cell);
+                const datosSoloPrecio = await response2.json();
+                //console.log(datosSoloPrecio);
+                listaDePrecios1.push(datosSoloPrecio);
+                UI.addCryptoToListF(crypto, datosSoloPrecio, mas)
+                // const map = new Map(Object.entries(datosSoloPrecio));
+                // console.log(map);
+                // console.log(Object.entries(datosSoloPrecio));
+                // UI.addCryptoToListF(crypto, datosSoloPrecio);
+                //console.log(listaDePrecios1);
+                //document.getElementById('pre').textContent = listaDePrecios1[0].price;
+                
+            }
+        }
+        flag();        
+        /* for (let [i, cripi] of (listaDePrecios1).entries()) {
+            live[i].innerHTML = `${parseFloat(cripi.price)}`;
 
 
-             } */
+        } */
+        
 
+
+        
+        
+    }
+    static addCryptoToListF(cryptoF, algo, mas) {
+        console.log(cryptoF);
+        //console.log(algo);
+        //const map = new Map(Object.entries(algo));
+        console.log(mas);
+        //console.log(map);
+        const live = document.getElementsByClassName('precio');
+        /* const pus = pux => {
+            live.innerHTML = `${algo.price}`;
+            
+        };
+        pus(); */
+        for (let [i, cripi] of [mas].entries()) {
+            console.log(cripi.price);
+            console.log(i);
+            live[i].innerHTML = `${parseFloat(cripi.price)}`;
+            
+
+        }
          
-         list.appendChild(row);
+        
+        const list = document.querySelector('#crypto-list');
+        const row = document.createElement('tr');
+        row.setAttribute("id", "otro");
+        list.appendChild(row);
          row.innerHTML = `
-                        <td class="sim" onload="mifuc()" >${crypto.symbol}</td>
-                        <td class="precio" id="pre">${crypto.price}</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
-                    `;
-
-
-
-     }
-     
+                               <td class="sim" onload="mifuc()" >${cryptoF.symbol}</td>
+                               <td class="precio" id="pre">0</td>
+                               <td>0</td>
+                               <td>0</td>
+                               <td><a href="#" class="btn btn-danger btn-sm delete" >X</a></td>
+                           `;
+    }
 
      static deleteCrypto(el) {
         if (el.classList.contains('delete')) {
