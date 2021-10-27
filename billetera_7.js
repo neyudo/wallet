@@ -88,7 +88,7 @@ const outputHtml = matches => {
                  btc = datos[11],
                  eth = datos[12],
                  ksm = datos[1007],
-                 cryptos = [btc, eth, ksm];
+                 cryptos = CryptoList.getCrypto();
              //console.log(cryptos);
              cryptos.forEach((crypto) => UI.addCryptoToList(crypto));
          }
@@ -196,13 +196,14 @@ class CryptoList {
 
     static removeCrypto(symbol) {
         const cryptoMonedas = CryptoList.getCrypto();
+        console.log(cryptoMonedas);
         cryptoMonedas.forEach((crypto, index) => {
-            console.log(crypto.symbol);
-            console.log(symbol);
             if (crypto.symbol === symbol) {
-                cryptoMonedas.split(index, 1);
+                console.log(crypto, index);
+                cryptoMonedas.splice(index, 1);
             }
         });
+        localStorage.setItem('cryptoMonedas', JSON.stringify(cryptoMonedas))
     }
      
  }
@@ -211,10 +212,9 @@ document.querySelector('#crypto-list').addEventListener('click', function cosi(e
     //Remove a Crypto from UI
     UI.deleteCrypto(event.target);
     //Remove Crypto from Local
-    console.log(event.target.parentElement.previousElementSibling.textContent);
-    console.log(event.path[2].textContent);
-    console.log(event.path[2]);
-    CryptoList.removeCrypto(event.path[2].textContent);
+    //console.log(event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
+    
+    CryptoList.removeCrypto(event.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.textContent);
 });
 // Event: Display Crypto
 
